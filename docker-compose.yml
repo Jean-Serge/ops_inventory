@@ -1,0 +1,21 @@
+version: '2'
+services:
+  ops-inventory-dev:
+    image: postgres:9.6
+    container_name: ops-inventory-dev
+    environment:
+      POSTGRES_DB: ops_inventory_dev
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: mdp
+    ports:
+      - 5555:5432/tcp
+
+  ops-inventory-test:
+    image: postgres:9.6
+    container_name: ops-inventory-test
+    environment:
+      POSTGRES_DB: ops_inventory_test
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+    ports:
+      - 5554:5432/tcp
