@@ -5,7 +5,7 @@ defmodule OpsInventory.DigitalOceanController do
 
     alias OpsInventory.Server
 
-    def synchronize_servers do
+    def synchronize_servers(conn, _params) do
         list_droplets()
         |> Enum.map(fn(droplet) ->
             Server.insert_or_update_droplet(%{
@@ -14,5 +14,7 @@ defmodule OpsInventory.DigitalOceanController do
                 ip_address: List.first(droplet.networks.v4).ip_address
             })
         end)
+
+        json conn, %{ok: true}
     end
 end

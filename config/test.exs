@@ -18,3 +18,5 @@ config :ops_inventory, OpsInventory.Repo,
   hostname: "localhost",
   port: 5554,
   pool: Ecto.Adapters.SQL.Sandbox
+
+  import_config "dev.secret.exs"

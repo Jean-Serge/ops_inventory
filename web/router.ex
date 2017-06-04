@@ -21,7 +21,9 @@ defmodule OpsInventory.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", OpsInventory do
-  #   pipe_through :api
-  # end
+  scope "/api", OpsInventory do
+    pipe_through :api
+
+    patch "/synchronize_droplets",  DigitalOceanController, :synchronize_servers
+  end
 end
