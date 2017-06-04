@@ -21,6 +21,7 @@ defmodule OpsInventory.DigitalOcean do
     defp process_response_body(body) do
         body
         |> Poison.decode!
+        |> OpsInventory.Utils.string_to_atom
     end
 
     @doc """
@@ -31,7 +32,7 @@ defmodule OpsInventory.DigitalOcean do
     def list_droplets do
         case get("/droplets") do
             { :ok, response } ->
-                response.body["droplets"]
+                response.body.droplets
             { :error, _ }     -> 
                 []
         end
@@ -45,7 +46,7 @@ defmodule OpsInventory.DigitalOcean do
     def get_by_id(id) do
         case get("/droplets/#{id}") do
             { :ok, response } ->
-                response.body["droplet"]
+                response.body.droplet
             { :error, _ }     ->
                 %{}
         end
