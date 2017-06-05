@@ -28,7 +28,10 @@ defmodule OpsInventory.ServerController do
 
   def show(conn, %{"id" => id}) do
     case Repo.get(Server, id) do
-      nil -> put_status(conn, 404) |> render(OpsInventory.ErrorView, "404.html")
+      nil -> 
+        conn
+        |> put_status(404)
+        |> render(OpsInventory.ErrorView, "404.html")
       server -> render(conn, "show.html", server: server)
     end
   end
