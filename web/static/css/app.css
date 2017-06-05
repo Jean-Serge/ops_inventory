@@ -1,1 +1,10 @@
 /* This file is for your main application css. */
+
+button {
+    float: right;
+    background-color: white;
+    line-height: 1.5;
+    border: 1px solid;
+    border-color: #ccc;
+    border-radius: 3px;
+}
