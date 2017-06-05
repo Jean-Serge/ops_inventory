@@ -5,9 +5,9 @@ defmodule OpsInventory.DigitalOcean do
 
     use HTTPoison.Base
 
-    @endpoint "https://api.digitalocean.com/v2"
+    @endpoint Application.get_env(:ops_inventory, DigitalOcean)[:endpoint]
     @token Application.get_env(:ops_inventory, DigitalOcean)[:token]
-    
+
     defp process_url(url), do: @endpoint <> url
 
     defp process_request_headers(headers) do
