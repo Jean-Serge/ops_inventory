@@ -32,7 +32,8 @@ defmodule OpsInventory.ServerController do
         conn
         |> put_status(404)
         |> render(OpsInventory.ErrorView, "404.html")
-      server -> render(conn, "show.html", server: server)
+      server -> 
+        render(conn, "show.html", server: server)
     end
   end
 
@@ -57,14 +58,22 @@ defmodule OpsInventory.ServerController do
   end
 
   def delete(conn, %{"id" => id}) do
-    server = Repo.get!(Server, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(server)
-
-    conn
-    |> put_flash(:info, "Server deleted successfully.")
-    |> redirect(to: server_path(conn, :index))
+    case Repo.get(Server, id) do
+      nil -> 
+        conn
+        |> put_status(404)
+        |> render(OpsInventory.ErrorView, "404.html")
+      server ->
+        case Repo.delete server do
+          {:ok, _} -> 
+            conn
+            |> put_flash(:info, "Server deleted successfully.")
+            |> redirect(to: server_path(conn, :index))
+          {:error, _} ->
+            conn
+            |> put_status(500)
+            |> render(OpsInventory.ErrorView, "500.html")
+        end
+    end
   end
 end
