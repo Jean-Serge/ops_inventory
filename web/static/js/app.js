@@ -22,6 +22,4 @@ import "phoenix_html"
 
 import EventHandlers from "./event_handlers"
 
-export { 
-    EventHandlers
-}
+export { EventHandlers }
