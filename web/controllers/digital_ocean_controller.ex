@@ -5,6 +5,9 @@ defmodule OpsInventory.DigitalOceanController do
 
     alias OpsInventory.Server
 
+    @doc """
+    Fetch all droplets from Digital Ocean API and upsert them into the database.
+    """
     def synchronize_droplets(conn, _params) do
         list_droplets()
         |> Enum.map(fn(droplet) ->
@@ -18,6 +21,11 @@ defmodule OpsInventory.DigitalOceanController do
         json conn, %{ok: true}
     end
 
+    @doc """
+    Fetch the status of all droplet using the Digital Ocean API.
+
+    TODO : Find a realtime way of tracking server downtime.
+    """
     def check_droplet_availability do
         droplets =
             list_droplets()
