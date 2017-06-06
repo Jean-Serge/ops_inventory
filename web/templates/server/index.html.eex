@@ -1,7 +1,7 @@
 <h2>Listing servers</h2>
 
 
-<button type="submit" onclick="event_handlers.synchronizeDroplets()">Synchronize</button>
+<button type="submit" id="btn-sync-droplet">Synchronize</button>
 
 <table class="table">
   <thead>

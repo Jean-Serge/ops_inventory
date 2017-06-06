@@ -1,6 +1,6 @@
 /* This file is for your main application css. */
 
-button {
+#btn-sync-droplet {
     float: right;
     background-color: white;
     line-height: 1.5;

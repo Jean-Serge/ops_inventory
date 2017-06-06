@@ -20,6 +20,4 @@ import "phoenix_html"
 
 // import socket from "./socket"
 
-import EventHandlers from "./event_handlers"
-
-export { EventHandlers }
+import "./event_handlers"
