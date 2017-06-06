@@ -1,12 +1,8 @@
-function synchronizeDroplets() {
-    const xhttp = new XMLHttpRequest();
-    xhttp.open("PATCH", "/api/synchronize_droplets", false);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send();
-    const response = JSON.parse(xhttp.responseText);
-    console.log(response)
-}
+import {
+    patchDroplets
+} from './api_wrapper'
 
-module.exports = {
-    synchronizeDroplets
-}
+// No need to do more work at this moment
+const synchronizeDroplets = patchDroplets
+
+export { synchronizeDroplets }
