@@ -5,7 +5,7 @@ defmodule OpsInventory.DigitalOceanController do
 
     alias OpsInventory.Server
 
-    def synchronize_servers(conn, _params) do
+    def synchronize_droplets(conn, _params) do
         list_droplets()
         |> Enum.map(fn(droplet) ->
             Server.insert_or_update_droplet(%{
