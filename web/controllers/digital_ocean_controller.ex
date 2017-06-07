@@ -3,20 +3,14 @@ defmodule OpsInventory.DigitalOceanController do
 
     import OpsInventory.DigitalOcean
 
-    alias OpsInventory.Server
+    alias OpsInventory.Droplet
 
     @doc """
     Fetch all droplets from Digital Ocean API and upsert them into the database.
     """
-    def synchronize_droplets(conn, _params) do
+    def synchronize(conn, _params) do
         list_droplets()
-        |> Enum.map(fn(droplet) ->
-            Server.insert_or_update_droplet(%{
-                name: droplet.name,
-                id_digital_ocean: droplet.id,
-                ip_address: List.first(droplet.networks.v4).ip_address
-            })
-        end)
+        |> Enum.map(&Droplet.upsert/1)
 
         json conn, %{ok: true}
     end
@@ -36,22 +30,24 @@ defmodule OpsInventory.DigitalOceanController do
                 }
             end)
 
+
         (
-            from s in Server,
-            where: not is_nil(s.id_digital_ocean),
+            from d in Droplet,
             select: %{
-                id: s.id,
-                id_digital_ocean: s.id_digital_ocean
+                server_id: d.server_id,
+                droplet_id: d.droplet_id
             }
         )
         |> Repo.all
-        |> Enum.map(fn(server = %{ id_digital_ocean: id_digital_ocean }) ->
+        |> Enum.map(fn(droplet) ->
+            IO.inspect droplet
+
             status = 
                 Enum.find(droplets,
-                    fn(%{ id: id }) -> id === id_digital_ocean end
+                    fn(%{ id: id }) -> id === droplet.droplet_id end
                 ).status
             
-            Map.put(server, :status, status)
+            Map.put(droplet, :status, status)
         end)
     end
 end

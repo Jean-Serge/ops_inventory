@@ -24,6 +24,6 @@ defmodule OpsInventory.Router do
   scope "/api", OpsInventory do
     pipe_through :api
 
-    patch "/synchronize_droplets",  DigitalOceanController, :synchronize_droplets
+    patch "/synchronize_droplets",  DigitalOceanController, :synchronize
   end
 end
