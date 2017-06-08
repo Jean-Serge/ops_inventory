@@ -4,7 +4,8 @@ defmodule OpsInventory.Droplet do
     alias OpsInventory.{
         Repo,
         Server,
-        Droplet
+        Droplet,
+        ApiDroplet
     }
 
     schema "droplets" do
@@ -23,6 +24,11 @@ defmodule OpsInventory.Droplet do
         |> unique_constraint(:server_id)
     end
 
+    def synchronize do
+        ApiDroplet.to_insert()
+        |> Enum.map(&upsert/1)
+    end
+
     def create_from_server(server, droplet_id) do
         %Droplet{
             droplet_id: droplet_id,
@@ -32,22 +38,33 @@ defmodule OpsInventory.Droplet do
         |> Repo.insert!
     end
 
-    def upsert(droplet) do
+    def upsert(%{ name: name, id: id, ip_address: ip_address}) do
         server = %{
-            name: droplet.name,
-            ip_address: List.first(droplet.networks.v4).ip_address
+            name: name,
+            ip_address: ip_address
         }
 
-        case Repo.get_by(Droplet, droplet_id: droplet.id) do
+        case Repo.get_by(Droplet, droplet_id: id) do
             nil     ->
                 struct(Server, server)
                 |> Server.changeset
                 |> Repo.insert!
-                |> Droplet.create_from_server(droplet.id)
+                |> Droplet.create_from_server(id)
             result  ->
                 Repo.get!(Server, result.server_id)
                 |> Server.changeset(server)
                 |> Repo.update!
         end
+    end
+
+    def all_status do
+        (
+            from d in Droplet,
+            select: %{
+                server_id: d.server_id,
+                droplet_id: d.droplet_id
+            }
+        )
+        |> Repo.all
     end
 end
