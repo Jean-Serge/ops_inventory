@@ -29,8 +29,9 @@ defmodule OpsInventory.DigitalOceanController do
                 Enum.find(status_list,
                     fn(%{ id: id }) -> id === droplet.droplet_id end
                 ).status
-
-            Map.put(droplet, :status, status)
+            
+            payload = Map.put(droplet, :status, status)
+            OpsInventory.Endpoint.broadcast("droplets:status", "new_status", payload)
         end)
     end
 end
