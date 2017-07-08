@@ -1,6 +1,8 @@
 defmodule OpsInventory.DropletChannel do
     use OpsInventory.Web, :channel
 
+    intercept ["new_status"]
+
     def join("droplets:status", _msg, socket), do: {:ok, socket}    
     def join("droplets:" <> _room, _msg, _s), do: {:error, %{reason: "unauthorized"}}
 
