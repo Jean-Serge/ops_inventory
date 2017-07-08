@@ -7,6 +7,12 @@ defmodule OpsInventory.Server do
 
   use OpsInventory.Web, :model
 
+  alias OpsInventory.{
+    Server,
+    Droplet,
+    Repo
+  }
+
   schema "servers" do
     field :name, :string
     field :ip_address, :string
@@ -23,5 +29,14 @@ defmodule OpsInventory.Server do
     struct
     |> cast(params, [:name, :ip_address])
     |> validate_required([:name, :ip_address])
+  end
+
+  def all do
+    (
+      from s in Server,
+      preload: [:droplet]
+    )
+    |> Repo.all
+    |> IO.inspect
   end
 end
