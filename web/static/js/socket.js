@@ -59,7 +59,6 @@ socket.connect()
 let channel = socket.channel("droplets:status", {})
 
 channel.on("new_status", payload => {
-  console.log(payload)
   const elt = document.getElementById(payload.droplet_id)
   elt.className = payload.status
 })
