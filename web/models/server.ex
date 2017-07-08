@@ -37,6 +37,5 @@ defmodule OpsInventory.Server do
       preload: [:droplet]
     )
     |> Repo.all
-    |> IO.inspect
   end
 end
