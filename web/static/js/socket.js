@@ -56,7 +56,18 @@ let socket = new Socket('/socket', {params: {token: window.userToken}})
 socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
+<<<<<<< HEAD
 let channel = socket.channel('topic:subtopic', {})
+=======
+let channel = socket.channel("droplets:status", {})
+
+channel.on("new_status", payload => {
+  console.log(payload)
+  const elt = document.getElementById(payload.droplet_id)
+  elt.className = payload.status
+})
+
+>>>>>>> Add handler for channel messages
 channel.join()
   .receive('ok', resp => { logger.info('Joined successfully', resp) })
   .receive('error', resp => { logger.error('Unable to join', resp) })
