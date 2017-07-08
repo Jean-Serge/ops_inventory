@@ -1,19 +1,10 @@
 defmodule OpsInventory.Utils do
-
-    defmacrop is_enum(x) do
-        quote do: is_map(unquote(x)) or is_list(unquote(x))
-    end
-
-    def string_to_atom(s) when (not is_enum(s)), do: s
-    def string_to_atom(l) when is_list(l) do
-        Enum.map l, fn(elt) -> string_to_atom(elt) end
-    end
-
+    
     @doc """
     Convert the given map to use keyword instead of string.
     """
-    def string_to_atom(map) do
-        Enum.map(map, fn(elt) ->
+    def string_to_atom(m) when is_map(m) do
+        Enum.map(m, fn(elt) ->
             case elt do
                 {k, v} -> {String.to_atom(k), string_to_atom(v)}
                 x      -> string_to_atom(x)
@@ -21,4 +12,7 @@ defmodule OpsInventory.Utils do
         end)
         |> Map.new # Build a new map
     end
+
+    def string_to_atom(l) when is_list(l), do: Enum.map l, &string_to_atom/1
+    def string_to_atom(s), do: s
 end
