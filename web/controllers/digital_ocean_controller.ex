@@ -21,13 +21,13 @@ defmodule OpsInventory.DigitalOceanController do
     TODO : Find a realtime way of tracking server downtime.
     """
     def check_droplet_availability do
-        statuses = ApiDroplet.all_status()
+        status_list = ApiDroplet.all_status
 
         Droplet.all_status
         |> Enum.map(fn(droplet) ->
-            status =
-                Enum.find(statuses,
-                    fn(%{id: id}) -> id === droplet.droplet_id end
+            status = 
+                Enum.find(status_list,
+                    fn(%{ id: id }) -> id === droplet.droplet_id end
                 ).status
 
             Map.put(droplet, :status, status)
