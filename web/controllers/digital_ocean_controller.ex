@@ -1,5 +1,7 @@
 defmodule OpsInventory.DigitalOceanController do
     use OpsInventory.Web, :controller
+    
+    require Logger
 
     alias OpsInventory.{
         Droplet,
@@ -24,14 +26,17 @@ defmodule OpsInventory.DigitalOceanController do
         status_list = ApiDroplet.all_status
 
         Droplet.all_status
-        |> Enum.map(fn(droplet) ->
-            status = 
-                Enum.find(status_list,
-                    fn(%{ id: id }) -> id === droplet.droplet_id end
-                ).status
+        |> Enum.each(fn(droplet) ->
+            match = Enum.find(status_list, fn(%{id: id}) -> id === droplet.droplet_id end)
             
-            payload = Map.put(droplet, :status, status)
-            OpsInventory.Endpoint.broadcast("droplets:status", "new_status", payload)
+            case match do
+                nil ->
+                    Logger.info "No droplet matching id #{droplet.droplet_id} on Digital Ocean account"
+                %{ status: s} ->
+                    Logger.info "Status found for droplet #{droplet.droplet_id}"
+                    payload = Map.put(droplet, :status, s)
+                    OpsInventory.Endpoint.broadcast("droplets:status", "new_status", payload)
+            end
         end)
     end
 end
