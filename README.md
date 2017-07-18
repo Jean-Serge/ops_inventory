@@ -1,5 +1,25 @@
 # OpsInventory
 
+## Configuration
+
+### Database
+
+You need a PostgreSQL database to run this application. You can use the **docker-compose.yml** file of this repo to create your database.
+
+Start by install _docker_ and _docker-compose_ for your platform, then run `docker-compose up -d`, it will create database for _dev_ and _test_ environment.
+
+Note : If you only want a _dev_ database, you can run `docker-compose up -d ops-inventory-dev`.
+
+### Application
+
+Complete the file **config/dev.exs** with your database credentials.
+
+Note : If you created your database using _docker_, you can skip this step.
+
+Then copy and fill the file **config/dev.secret.exs.example** to **config/dev.secret.exs**.
+
+## Run
+
 To start your Phoenix app:
 
   * Install dependencies with `mix deps.get`

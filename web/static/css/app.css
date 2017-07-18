@@ -1,1 +1,9 @@
 /* This file is for your main application css. */
+
+#btn-sync-droplet {
+    float: right;
+    background-color: white;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}

@@ -17,10 +17,13 @@ defmodule OpsInventory.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/servers", ServerController
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", OpsInventory do
-  #   pipe_through :api
-  # end
+  scope "/api", OpsInventory do
+    pipe_through :api
+
+    patch "/synchronize_droplets",  DigitalOceanController, :synchronize
+  end
 end
