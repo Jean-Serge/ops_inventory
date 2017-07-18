@@ -8,10 +8,26 @@
     line-height: 1.5;
 }
 
+.droplet-status {
+    min-height: 20px;
+    max-width: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    background-color: grey;
+}
+
 .active {
-    color: green;
+    min-height: 20px;
+    max-width: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    background-color: green;
 }
 
 .inactive {
-    color: red;
+    min-height: 20px;
+    max-width: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    background-color: red;
 }

@@ -17,7 +17,7 @@
 <%= for server <- @servers do %>
     <tr>
       <td>
-        <div id=<%= server.droplet.droplet_id %>>Hey !</div>
+        <div id=<%= server.droplet.droplet_id %> class="droplet-status"></div>
       </td>
       <td><%= server.name %></td>
       <td><%= server.ip_address %></td>
