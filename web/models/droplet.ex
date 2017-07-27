@@ -1,4 +1,12 @@
 defmodule OpsInventory.Droplet do
+
+    @moduledoc """
+    Represents a Droplet in the project.
+
+    A droplet is a special type of OpsInventory.Server that contains
+    a field droplet_id to be used with Digital Ocean's API.
+    """
+
     use OpsInventory.Web, :model
 
     alias OpsInventory.{
@@ -38,7 +46,7 @@ defmodule OpsInventory.Droplet do
         |> Repo.insert!
     end
 
-    def upsert(%{ name: name, id: id, ip_address: ip_address}) do
+    def upsert(%{name: name, id: id, ip_address: ip_address}) do
         server = %{
             name: name,
             ip_address: ip_address
@@ -46,18 +54,21 @@ defmodule OpsInventory.Droplet do
 
         case Repo.get_by(Droplet, droplet_id: id) do
             nil     ->
-                struct(Server, server)
+                Server
+                |> struct(server)
                 |> Server.changeset
                 |> Repo.insert!
                 |> Droplet.create_from_server(id)
-            result  ->
-                Repo.get!(Server, result.server_id)
+            %{id: id} ->
+                Server
+                |> Repo.get!(id)
                 |> Server.changeset(server)
                 |> Repo.update!
         end
     end
 
     def all_status do
+        Repo.all
         (
             from d in Droplet,
             select: %{
@@ -65,6 +76,5 @@ defmodule OpsInventory.Droplet do
                 droplet_id: d.droplet_id
             }
         )
-        |> Repo.all
     end
 end

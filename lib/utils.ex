@@ -1,18 +1,15 @@
 defmodule OpsInventory.Utils do
-    
-    @doc """
+
+    @moduledoc """
     Convert the given map to use keyword instead of string.
     """
     def string_to_atom(m) when is_map(m) do
-        Enum.map(m, fn(elt) ->
-            case elt do
-                {k, v} -> {String.to_atom(k), string_to_atom(v)}
-                x      -> string_to_atom(x)
-            end
-        end)
+        m
+        |> Enum.map(&string_to_atom/1)
         |> Map.new # Build a new map
     end
 
     def string_to_atom(l) when is_list(l), do: Enum.map l, &string_to_atom/1
+    def string_to_atom({k, v}), do: {String.to_atom(k), string_to_atom(v)}
     def string_to_atom(s), do: s
 end

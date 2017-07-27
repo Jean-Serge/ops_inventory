@@ -1,4 +1,8 @@
 defmodule OpsInventory.ApiDroplet do
+    @moduledoc """
+    Non-persistent model to define a Droplet from Digital Ocean's API.
+    """
+
     import OpsInventory.DigitalOcean
 
     def to_insert do
@@ -9,7 +13,7 @@ defmodule OpsInventory.ApiDroplet do
                 name: droplet.name,
                 ip_address: List.first(droplet.networks.v4).ip_address
             }
-        end)        
+        end)
     end
 
     def all_status do

@@ -1,4 +1,10 @@
 defmodule OpsInventory.Server do
+  @moduledoc """
+  Represents a Server.
+
+  It is the base entity in this application.
+  """
+
   use OpsInventory.Web, :model
 
   schema "servers" do
