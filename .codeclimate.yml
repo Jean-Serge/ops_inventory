@@ -2,7 +2,12 @@ engines:
   credo:
     enabled: true
     channel: "beta"
+  eslint:
+    enabled: true
+
 ratings:
   paths:
   - "**.ex"
   - "**.exs"
+  - "**.js"
+
