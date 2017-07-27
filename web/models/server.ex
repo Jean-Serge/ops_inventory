@@ -32,10 +32,10 @@ defmodule OpsInventory.Server do
   end
 
   def all do
-    (
+    Repo.all (
       from s in Server,
-      preload: [:droplet]
+      join: d in assoc(s, :droplet),
+      preload: [droplet: d]
     )
-    |> Repo.all
   end
 end
