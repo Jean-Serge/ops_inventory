@@ -2,7 +2,11 @@ engines:
   credo:
     enabled: true
     channel: "beta"
+  
   eslint:
+    enabled: true
+
+  csslint:
     enabled: true
 
 ratings:
@@ -10,4 +14,4 @@ ratings:
   - "**.ex"
   - "**.exs"
   - "**.js"
-
+  - "**.css"
