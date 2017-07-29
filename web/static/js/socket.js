@@ -56,9 +56,9 @@ let socket = new Socket('/socket', {params: {token: window.userToken}})
 socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("droplets:status", {})
+let channel = socket.channel('droplets:status', {})
 
-channel.on("new_status", payload => {
+channel.on('new_status', payload => {
   const elt = document.getElementById(payload.droplet_id)
   elt.className = payload.status
 })
