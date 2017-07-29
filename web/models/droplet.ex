@@ -68,8 +68,7 @@ defmodule OpsInventory.Droplet do
     end
 
     def all_status do
-        Repo.all
-        (
+        Repo.all (
             from d in Droplet,
             select: %{
                 server_id: d.server_id,
