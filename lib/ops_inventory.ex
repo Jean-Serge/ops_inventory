@@ -18,7 +18,7 @@ defmodule OpsInventory do
       supervisor(OpsInventory.Repo, []),
       # Start the endpoint when the application starts
       supervisor(OpsInventory.Endpoint, []),
-      # Start your own worker by calling: OpsInventory.Worker.start_link(arg1, arg2, arg3)
+      # Start application's scheduler
       worker(OpsInventory.Scheduler, [])
     ]
 

@@ -1,7 +1,13 @@
 defmodule OpsInventory.Scheduler do
+    @moduledoc """
+    Handlers for scheduled tasks.
+    """
+
     use GenServer
 
-    import OpsInventory.DigitalOceanController, only: [check_droplet_availability: 0]
+    import OpsInventory.DigitalOceanController, only: [
+        check_droplet_availability: 0
+    ]
 
     def start_link, do: GenServer.start_link(__MODULE__, %{})
 
@@ -15,7 +21,7 @@ defmodule OpsInventory.Scheduler do
         schedule_droplets_status()
         {:noreply, state}
     end
-    
+
     defp schedule_droplets_status do
         Process.send_after(self(), :droplet_status, 10 * 1000)
     end
