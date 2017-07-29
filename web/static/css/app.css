@@ -10,25 +10,25 @@
 }
 
 .droplet-status {
-    min-height: 20px;
-    max-width: 20px;
+    background-color: grey;
     border: 1px solid #ccc;
     border-radius: 50%;
-    background-color: grey;
+    max-width: 20px;
+    min-height: 20px;    
 }
 
 .active {
-    min-height: 20px;
-    max-width: 20px;
+    background-color: green;
     border: 1px solid #ccc;
     border-radius: 50%;
-    background-color: green;
+    max-width: 20px;
+    min-height: 20px;    
 }
 
 .inactive {
-    min-height: 20px;
-    max-width: 20px;
+    background-color: red;
     border: 1px solid #ccc;
     border-radius: 50%;
-    background-color: red;
+    max-width: 20px;
+    min-height: 20px;    
 }
