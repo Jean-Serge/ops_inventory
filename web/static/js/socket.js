@@ -60,7 +60,18 @@ let channel = socket.channel('droplets:status', {})
 
 channel.on('new_status', payload => {
   const elt = document.getElementById(payload.droplet_id)
-  if (elt) elt.className = payload.status
+  
+  if (elt) {
+    switch (payload.status) {
+    case 'active':
+      elt.className = 'active'
+      break
+    case 'inactive':
+    case 'off':
+      elt.className = 'inactive'
+      break
+    }
+  }
 })
 
 channel.join()
