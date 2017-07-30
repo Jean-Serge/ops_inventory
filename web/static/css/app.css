@@ -1,5 +1,75 @@
 /* This file is for your main application css. */
 
+
+img {
+    width : 75px ; 
+}
+
+h1 {
+    background-color: red;
+}
+
+h2 {
+    background-color: white;
+}
+
+.nav {
+    text-align: left; 
+}
+
+.nav ul {
+    list-style : none ;
+    background-color: #4A4A4A;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.nav ul li {
+    display: inline;
+}
+
+.nav ul li a {
+    color: white;
+    padding : 20px;
+}
+
+.nav a:link,
+.nav a:hover, 
+.nav a:visited, 
+.nav a:active {
+    color: white;
+    text-decoration: none;
+}
+
+.table {
+    border-collapse: collapse;
+    border: thin solid #4A4A4A;
+}
+
+.table thead { /*goupe de cellules d'en tête */
+    color: white;
+    background-color: #4A4A4A;
+    text-align: left;
+}
+
+.table th {
+    padding-left: 25px;
+    padding-right: 25px;
+    width: 150px;
+}
+
+.table thead tr { /* cellule d'en tête*/
+    padding: 20px;
+}
+
+.table tbody { /*cellule de corps */
+    background-color: white;
+    border-collapse: collapse;
+    color : black;
+    padding : 20px;
+}
+
+
 .btn-sync-droplet {
     background-color: white;
     border: 1px solid #ccc;

@@ -1,5 +1,22 @@
-<h2>Listing servers</h2>
+<body>
 
+  <header>
+    <div class="banner">
+      <img src="images/docker.png" alt="test logo"/><a href=""></a>
+    </div>
+
+    <div class= "nav">
+      <ul>
+        <li><a href="">Listing servers</a></li>
+        <li><a href="">other </a></li>
+        <li><a href="">other </a></li>
+      </ul>
+    </div>
+  </header>
+
+</body>
+
+<h2>Listing servers</h2>
 
 <button type="submit" class="btn-sync-droplet">Synchronize</button>
 
@@ -9,8 +26,7 @@
       <th>Status</th>
       <th>Name</th>
       <th>Ip address</th>
-
-      <th></th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
