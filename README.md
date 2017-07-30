@@ -1,3 +1,6 @@
+[![Code Climate](https://codeclimate.com/github/Jean-Serge/ops_inventory.png)](https://codeclimate.com/github/Jean-Serge/ops_inventory)
+[![Issue Count](https://codeclimate.com/github/Jean-Serge/ops_inventory/badges/issue_count.svg)](https://codeclimate.com/github/Jean-Serge/ops_inventory)
+
 # OpsInventory
 
 ## Configuration

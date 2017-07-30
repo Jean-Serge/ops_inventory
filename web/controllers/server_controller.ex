@@ -4,7 +4,7 @@ defmodule OpsInventory.ServerController do
   alias OpsInventory.Server
 
   def index(conn, _params) do
-    servers = Repo.all(Server)
+    servers = Server.all()
     render(conn, "index.html", servers: servers)
   end
 
@@ -28,11 +28,11 @@ defmodule OpsInventory.ServerController do
 
   def show(conn, %{"id" => id}) do
     case Repo.get(Server, id) do
-      nil -> 
+      nil ->
         conn
         |> put_status(404)
         |> render(OpsInventory.ErrorView, "404.html")
-      server -> 
+      server ->
         render(conn, "show.html", server: server)
     end
   end
@@ -59,13 +59,13 @@ defmodule OpsInventory.ServerController do
 
   def delete(conn, %{"id" => id}) do
     case Repo.get(Server, id) do
-      nil -> 
+      nil ->
         conn
         |> put_status(404)
         |> render(OpsInventory.ErrorView, "404.html")
       server ->
         case Repo.delete server do
-          {:ok, _} -> 
+          {:ok, _} ->
             conn
             |> put_flash(:info, "Server deleted successfully.")
             |> redirect(to: server_path(conn, :index))

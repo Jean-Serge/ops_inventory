@@ -5,6 +5,8 @@ defmodule OpsInventory.DigitalOcean do
 
     use HTTPoison.Base
 
+    alias OpsInventory.Utils
+
     @endpoint Application.get_env(:ops_inventory, DigitalOcean)[:endpoint]
     @token Application.get_env(:ops_inventory, DigitalOcean)[:token]
 
@@ -12,16 +14,15 @@ defmodule OpsInventory.DigitalOcean do
 
     defp process_request_headers(headers) do
         [
-            { "Content-Type",  "application/json" },
-            { "Authorization", "Bearer #{@token}" } |
-            headers
+            {"Content-Type",  "application/json"},
+            {"Authorization", "Bearer #{@token}"} | headers
         ]
     end
 
     defp process_response_body(body) do
         body
         |> Poison.decode!
-        |> OpsInventory.Utils.string_to_atom
+        |> Utils.string_to_atom
     end
 
     @doc """
@@ -31,9 +32,9 @@ defmodule OpsInventory.DigitalOcean do
     """
     def list_droplets do
         case get("/droplets") do
-            { :ok, response } ->
+            {:ok, response} ->
                 response.body.droplets
-            { :error, _ }     -> 
+            {:error, _}     ->
                 []
         end
     end
@@ -45,9 +46,9 @@ defmodule OpsInventory.DigitalOcean do
     """
     def get_by_id(id) do
         case get("/droplets/#{id}") do
-            { :ok, response } ->
+            {:ok, response} ->
                 response.body.droplet
-            { :error, _ }     ->
+            {:error, _}     ->
                 %{}
         end
     end

@@ -1,0 +1,9 @@
+{
+    "exclude-list": [
+        "web/static/css/phoenix.css",
+        "node_modules/",
+        "priv/static/",
+        "_build/",
+        "deps/"
+    ]
+}
