@@ -3,6 +3,7 @@ defmodule OpsInventory.UserSocket do
 
   ## Channels
   # channel "room:*", OpsInventory.RoomChannel
+  channel "droplets:*", OpsInventory.DropletChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

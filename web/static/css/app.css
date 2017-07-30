@@ -6,4 +6,26 @@
     border-radius: 3px;
     float: right;
     line-height: 1.5;
+    padding-top: 3px;
+}
+
+.active,
+.inactive,
+.default {
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    max-width: 20px;
+    min-height: 20px;    
+}
+
+.default {
+    background-color: grey;
+}
+
+.active {
+    background-color: green;
+}
+
+.inactive {
+    background-color: red;
 }

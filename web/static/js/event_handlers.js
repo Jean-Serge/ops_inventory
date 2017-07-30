@@ -3,6 +3,7 @@ import {
 } from './api_wrapper'
 
 // Event to synchronize droplets
-document
-  .getElementById('btn-sync-droplet')
-  .addEventListener('click', patchDroplets)
+const elts = document.getElementsByClassName('btn-sync-droplet')
+Array
+  .from(elts)
+  .forEach(elt => elt.addEventListener('click', patchDroplets))

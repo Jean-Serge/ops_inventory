@@ -4,7 +4,7 @@ defmodule OpsInventory.ServerController do
   alias OpsInventory.Server
 
   def index(conn, _params) do
-    servers = Repo.all(Server)
+    servers = Server.all()
     render(conn, "index.html", servers: servers)
   end
 
